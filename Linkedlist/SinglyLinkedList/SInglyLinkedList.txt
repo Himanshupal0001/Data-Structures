@@ -1,0 +1,244 @@
+// Online Javascript Editor for free
+// Write, Edit and Run your Javascript code using JS Online Compiler
+class Node{
+    constructor(data)
+    {
+        this.data = data;
+        this.next = null
+    }
+}
+
+class SinglyLinkedList{
+    constructor(head = null){
+        this.head = head;
+    }
+    
+    //Add Latest Node
+    addLatestNode(data){
+        const newNode = new Node(data);
+        if(!this.head){
+            this.head = newNode;
+        }
+        else{
+            const temp = this.head;
+            newNode.next = temp;
+            this.head = newNode
+        }
+    }
+    //Add at middle
+    addAtIndex(index,data){
+        const newNode = new Node(data);
+        if(index<0) return;
+        if(!this.head){
+            this.head = newNode;
+        }
+        else{
+        let counter = 0;
+        let curNode = this.head;
+        while(counter<index-1){
+            curNode = curNode.next;
+            counter++;
+        }
+        const temp = curNode
+        newNode.next = curNode.next;
+        curNode.next = newNode;
+        }
+        
+    }
+    //Add at End
+    addAtEnd(data){
+        const newNode = new Node(data);
+        if(!this.head){
+            this.head = newNode;
+        }
+        else{
+           let curNode = this.head;
+           while(curNode.next !== null){
+               curNode = curNode.next;
+           }
+           curNode.next = newNode;
+        }
+    }
+    
+    //Remove Elements
+    
+    //remove latest element
+    removeLatestNode(){
+        if(!this.head){
+            console.log('Nothing to delete')
+            return;
+        }
+        else if(this.head.next === null){
+            this.head = null
+            console.log(this.head)
+            return;
+        }
+        else{
+            this.head = this.head.next;
+        }
+    }
+    
+    //remove at index
+    removeAtIndex(index){
+        if(!this.head){
+            console.log('Nothing to delete')
+            return;
+        }
+        if(this.head.next === null && index == 0){
+            this.head = null
+            console.log(this.head)
+            return;
+        }
+        else{
+            let counter = 1;
+            let curNode = this.head
+            while(counter<index-1){
+                counter++;
+                curNode = curNode.next;
+            }
+            curNode.next = curNode.next.next;
+            return;
+            
+        }
+    }
+    
+    //remove last element
+    removeLastElement(){
+         if(!this.head){
+            console.log('Nothing to delete')
+            return;
+        }
+        else if(this.head.next === null){
+            this.head = null
+            console.log(this.head)
+            return;
+        }
+        else{
+            let curNode = this.head
+            while(curNode.next.next != null){
+                curNode = curNode.next;
+            }
+            curNode.next = null;
+            return;
+        }
+    }
+    
+    //Update Linkedlist
+    
+    //update latest element
+    updateFirstNode(data){
+        if(!this.head) return;
+        this.head.data = data;
+        return;
+    }
+    
+    //update index element
+    updateIndexNode(index,data){
+        if(!this.head){
+            return
+        }
+        else if(index===1){
+            this.head.data = data
+            return;
+        }
+        else{
+            let curNode = this.head;
+            let counter = 1;
+            
+            while(counter<index && curNode.next){
+                counter++;
+                curNode = curNode.next;
+            }
+            if(counter !== index){
+                console.log('Out of index error');
+                return;
+            }
+            curNode.data = data;
+            return
+            
+        }
+    }
+    
+    //update last element
+    updateLastNode(data){
+        if(!this.head){
+            return
+        }
+        else if(this.head.next === null){
+            this.head.data = data
+            return;
+        }
+        else{
+            let curNode = this.head;
+            while(curNode.next != null){
+                curNode = curNode.next;
+            }
+            curNode.data = data;
+            return;
+        }
+    }
+    
+    //find at index
+    find(index){
+        if(!this.head){
+            console.log('List is empty')
+            return;
+        }
+        else{
+            let curNode = this.head;
+            let counter = 1;
+            while(counter<index && curNode.next){
+                curNode = curNode.next;
+                counter++;
+            }
+            if(counter !== index){
+                console.log('Index out of bound');
+                return
+            }
+            else{
+                console.log(curNode.data);
+                return;
+            }
+        }
+        
+    }
+    
+    
+    
+    print(){
+        let curNode = this.head
+        while(curNode !== null){
+            console.log('--->',curNode.data);
+            curNode = curNode.next
+        }
+    }
+}
+
+const node = new SinglyLinkedList();
+node.addLatestNode(2)
+node.addLatestNode(3)
+node.addLatestNode(4)
+node.addLatestNode(5)
+node.addLatestNode(6)
+node.addAtEnd(10)
+node.addAtIndex(1, 20)
+node.addAtIndex(3, 20)
+
+//Removal of nodes
+//node.removeLatestNode()
+//node.removeLastElement()
+//node.removeAtIndex(3)
+
+//update value
+
+//node.updateFirstNode('KK')
+//node.updateLastNode('kk')
+//node.updateIndexNode(20,'kk');
+node.find(3)
+node.print()
+
+
+
+
+
+
